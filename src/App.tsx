@@ -1,35 +1,38 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import React from 'react';
+import { Menu } from 'antd';
+import ConfigProvider from 'antd/es/config-provider'; // 修改导入路径
+import { Layout as AntdLayout } from 'antd/es'; // 使用新的导入路径
+import 'antd/dist/reset.css'; // 导入样式
 
-function App() {
-  const [count, setCount] = useState(0)
+const { Header, Footer, Sider, Content } = AntdLayout;
 
-  return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
-}
+const App: React.FC = () => (
+  <ConfigProvider>
+    <AntdLayout style={{ minHeight: '100vh' }}>
+      <Sider collapsible>
+        <div className="logo" />
+        <Menu theme="dark" defaultSelectedKeys={['1']} mode="inline">
+          <Menu.Item key="1">首页</Menu.Item>
+          <Menu.Item key="2">关于</Menu.Item>
+          <Menu.Item key="3">联系</Menu.Item>
+        </Menu>
+      </Sider>
+      <AntdLayout className="site-layout">
+        <Header style={{ padding: 0 }} />
+        <Content style={{ margin: '0 16px' }}>
+          <div
+            className="site-layout-background"
+            style={{ padding: 24, minHeight: 360 }}
+          >
+            内容区域
+          </div>
+        </Content>
+        <Footer style={{ textAlign: 'center' }}>
+          Ant Design ©2018 Created by Ant UED
+        </Footer>
+      </AntdLayout>
+    </AntdLayout>
+  </ConfigProvider>
+);
 
-export default App
+export default App;
