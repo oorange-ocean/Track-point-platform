@@ -1,25 +1,23 @@
 // src/App.tsx
 
 import React from 'react';
-import { Layout, Menu, Breadcrumb, Card, Typography, Table, TableContainer, TableHead, TableRow, TableCell, Paper, Row, Col } from 'antd';
+import { Layout, Menu, Typography, Card, Table, Row, Col } from 'antd';
 import { Line } from 'react-chartjs-2';
 import { Chart as ChartJS, CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend } from 'chart.js';
 import { AppstoreAddOutlined, HomeOutlined, SearchOutlined } from '@ant-design/icons';
 
-// Register Chart.js components
+// 注册 Chart.js 组件
 ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend);
 
 const { Header, Content, Sider } = Layout;
 
 const App: React.FC = () => {
-  // Mock data for performance metrics and transactions
   const performanceData = {
     userMisery: [7.8, 8.1, 7.9, 8.3, 8.5],
     transactionsPerMinute: [8.5, 9.0, 8.7, 9.2, 9.5],
     failureRate: [1.2, 1.3, 1.1, 1.0, 0.9],
   };
 
-  // Chart data
   const lineChartData = {
     labels: ['第1天', '第2天', '第3天', '第4天', '第5天'],
     datasets: [
@@ -44,7 +42,6 @@ const App: React.FC = () => {
     ],
   };
 
-  // Data for the table
   const tableData = [
     {
       key: '1',
@@ -66,34 +63,35 @@ const App: React.FC = () => {
 
   return (
     <Layout style={{ minHeight: '100vh' }}>
-      {/* Sidebar */}
-      <Sider width={250} className="site-layout-background">
+      {/* 侧边栏 */}
+      <Sider width={250} style={{ background: '#32173A' }}>
         <div className="logo" />
         <Menu
           mode="inline"
           defaultSelectedKeys={['1']}
-          style={{ height: '100%', borderRight: 0 }}
+          theme="dark"
+          style={{ height: '100%', borderRight: 0, background: '#32173A', color: 'white' }}
         >
-          <Menu.Item key="1" icon={<HomeOutlined />}>
+          <Menu.Item key="1" icon={<HomeOutlined />} style={{ color: 'white' }}>
             仪表盘
           </Menu.Item>
-          <Menu.Item key="2" icon={<AppstoreAddOutlined />}>
+          <Menu.Item key="2" icon={<AppstoreAddOutlined />} style={{ color: 'white' }}>
             性能
           </Menu.Item>
-          <Menu.Item key="3" icon={<SearchOutlined />}>
+          <Menu.Item key="3" icon={<SearchOutlined />} style={{ color: 'white' }}>
             问题
           </Menu.Item>
         </Menu>
       </Sider>
 
-      {/* Layout for Header and Content */}
+      {/* 布局：头部+内容 */}
       <Layout style={{ padding: '0 24px 24px' }}>
-        {/* Header */}
+        {/* 头部 */}
         <Header className="site-layout-background" style={{ padding: 0, background: '#fff' }}>
           <Typography.Title level={3}>性能仪表盘</Typography.Title>
         </Header>
 
-        {/* Content */}
+        {/* 内容 */}
         <Content
           style={{
             padding: 24,
@@ -136,7 +134,7 @@ const App: React.FC = () => {
               </Card>
             </Col>
             <Col span={12}>
-              <Card title="性能改善" bordered={false}>
+              <Card title="改善效果" bordered={false}>
                 <Table
                   dataSource={tableData}
                   columns={[
