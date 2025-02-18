@@ -5,16 +5,22 @@ import Popconfirm from "antd/es/popconfirm";
 import message from "antd/es/message";
 import { fetchEvents, deleteEvent } from "./api";
 
+interface Event {
+  id: string;
+  name: string;
+  eventKey: string;
+}
+
 const EventTable: React.FC = () => {
-  const [events, setEvents] = useState([]);
+  const [events, setEvents] = useState<Event[]>([]);
 
   useEffect(() => {
     loadEvents();
   }, []);
 
   const loadEvents = async () => {
-    const data = await fetchEvents();
-    setEvents(data);
+    const data = await fetchEvents() as { data: Event[] };
+    setEvents(data.data);
   };
 
   const handleDelete = async (id: string) => {

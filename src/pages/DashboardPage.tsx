@@ -9,7 +9,7 @@ const DashboardPage: React.FC = () => (
   <Layout>
     <Content style={{ padding: "20px" }}>
       <h2>埋点数据看板</h2>
-      <FilterPanel onFilter={() => {}} />
+      <FilterPanel />
       <Dashboard />
     </Content>
   </Layout>
