@@ -1,5 +1,5 @@
 import React from "react";
-import { Layout } from "antd";
+import Layout from "antd/es/layout";
 import Dashboard from "../components/Dashboard";
 import FilterPanel from "../components/FilterPanel";
 

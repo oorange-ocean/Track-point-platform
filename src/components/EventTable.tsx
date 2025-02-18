@@ -1,5 +1,8 @@
 import React, { useEffect, useState } from "react";
-import { Table, Button, Popconfirm, message } from "antd";
+import Table from "antd/es/table";
+import Button from "antd/es/button";
+import Popconfirm from "antd/es/popconfirm";
+import message from "antd/es/message";
 import { fetchEvents, deleteEvent } from "./api";
 
 const EventTable: React.FC = () => {

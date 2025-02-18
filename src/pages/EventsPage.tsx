@@ -1,5 +1,5 @@
 import React from "react";
-import { Layout } from "antd";
+import Layout from "antd/es/layout";
 import EventTable from "../components/EventTable";
 
 const { Content } = Layout;

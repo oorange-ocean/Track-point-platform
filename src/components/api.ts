@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const API_BASE = "http://localhost:5000"; // 后端地址
+export const API_BASE = "http://localhost:5000"; // 后端地址
 
 // 获取埋点事件列表
 export const fetchEvents = async () => {

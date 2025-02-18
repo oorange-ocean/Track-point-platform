@@ -1,156 +1,55 @@
 // src/App.tsx
 
 import React from 'react';
-import { Layout, Menu, Typography, Card, Table, Row, Col } from 'antd';
-import { Line } from 'react-chartjs-2';
-import { Chart as ChartJS, CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend } from 'chart.js';
-import { AppstoreAddOutlined, HomeOutlined, SearchOutlined } from '@ant-design/icons';
+import Layout from 'antd/es/layout';
+import Menu from 'antd/es/menu';
+import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom';
+import { HomeOutlined, AppstoreAddOutlined, SearchOutlined, BugOutlined } from '@ant-design/icons';
+import ErrorsMonitorPage from './pages/ErrorsMonitorPage';
+import DashboardPage from './pages/DashboardPage';
+import EventsPage from './pages/EventsPage';
 
-// 注册 Chart.js 组件
-ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend);
-
-const { Header, Content, Sider } = Layout;
+const { Sider } = Layout;
 
 const App: React.FC = () => {
-  const performanceData = {
-    userMisery: [7.8, 8.1, 7.9, 8.3, 8.5],
-    transactionsPerMinute: [8.5, 9.0, 8.7, 9.2, 9.5],
-    failureRate: [1.2, 1.3, 1.1, 1.0, 0.9],
-  };
-
-  const lineChartData = {
-    labels: ['第1天', '第2天', '第3天', '第4天', '第5天'],
-    datasets: [
-      {
-        label: '用户痛苦指数',
-        data: performanceData.userMisery,
-        borderColor: 'rgba(255, 99, 132, 0.6)',
-        fill: false,
-      },
-      {
-        label: '每分钟交易量',
-        data: performanceData.transactionsPerMinute,
-        borderColor: 'rgba(54, 162, 235, 0.6)',
-        fill: false,
-      },
-      {
-        label: '失败率',
-        data: performanceData.failureRate,
-        borderColor: 'rgba(75, 192, 192, 0.6)',
-        fill: false,
-      },
-    ],
-  };
-
-  const tableData = [
-    {
-      key: '1',
-      transaction: '/product/details',
-      project: 'PlantMood',
-      tpm: 130,
-      failureRate: '0.33%',
-      userMisery: 452,
-    },
-    {
-      key: '2',
-      transaction: '/product/list',
-      project: 'PlantMood',
-      tpm: 154,
-      failureRate: '5.33%',
-      userMisery: 245,
-    },
-  ];
-
   return (
-    <Layout style={{ minHeight: '100vh' }}>
-      {/* 侧边栏 */}
-      <Sider width={250} style={{ background: '#32173A' }}>
-        <div className="logo" />
-        <Menu
-          mode="inline"
-          defaultSelectedKeys={['1']}
-          theme="dark"
-          style={{ height: '100%', borderRight: 0, background: '#32173A', color: 'white' }}
-        >
-          <Menu.Item key="1" icon={<HomeOutlined />} style={{ color: 'white' }}>
-            仪表盘
-          </Menu.Item>
-          <Menu.Item key="2" icon={<AppstoreAddOutlined />} style={{ color: 'white' }}>
-            性能
-          </Menu.Item>
-          <Menu.Item key="3" icon={<SearchOutlined />} style={{ color: 'white' }}>
-            问题
-          </Menu.Item>
-        </Menu>
-      </Sider>
+    <Router>
+      <Layout style={{ minHeight: '100vh' }}>
+        {/* 侧边栏 */}
+        <Sider width={250} style={{ background: '#32173A' }}>
+          <div className="logo" />
+          <Menu
+            mode="inline"
+            defaultSelectedKeys={['1']}
+            theme="dark"
+            style={{ height: '100%', borderRight: 0, background: '#32173A', color: 'white' }}
+          >
+            <Menu.Item key="1" icon={<HomeOutlined />}>
+              <Link to="/">埋点数据看板</Link>
+            </Menu.Item>
+            <Menu.Item key="2" icon={<AppstoreAddOutlined />}>
+              <Link to="/events">埋点事件管理</Link>
+            </Menu.Item>
+            <Menu.Item key="3" icon={<SearchOutlined />}>
+              <Link to="/performance">性能监控</Link>
+            </Menu.Item>
+            <Menu.Item key="4" icon={<BugOutlined />}>
+              <Link to="/errors">错误监控</Link>
+            </Menu.Item>
+          </Menu>
+        </Sider>
 
-      {/* 布局：头部+内容 */}
-      <Layout style={{ padding: '0 24px 24px' }}>
-        {/* 头部 */}
-        <Header className="site-layout-background" style={{ padding: 0, background: '#fff' }}>
-          <Typography.Title level={3}>性能仪表盘</Typography.Title>
-        </Header>
-
-        {/* 内容 */}
-        <Content
-          style={{
-            padding: 24,
-            margin: 0,
-            minHeight: 280,
-            background: '#fff',
-          }}
-        >
-          <Row gutter={16}>
-            <Col span={8}>
-              <Card title="用户痛苦指数" bordered={false}>
-                <Line data={lineChartData} />
-              </Card>
-            </Col>
-            <Col span={8}>
-              <Card title="每分钟交易量" bordered={false}>
-                <Line data={lineChartData} />
-              </Card>
-            </Col>
-            <Col span={8}>
-              <Card title="失败率" bordered={false}>
-                <Line data={lineChartData} />
-              </Card>
-            </Col>
-          </Row>
-
-          <Row gutter={16} style={{ marginTop: 24 }}>
-            <Col span={12}>
-              <Card title="最相关问题" bordered={false}>
-                <Table
-                  dataSource={tableData}
-                  columns={[
-                    { title: '交易', dataIndex: 'transaction', key: 'transaction' },
-                    { title: '项目', dataIndex: 'project', key: 'project' },
-                    { title: '每分钟交易量 (TPM)', dataIndex: 'tpm', key: 'tpm' },
-                    { title: '失败率', dataIndex: 'failureRate', key: 'failureRate' },
-                    { title: '用户痛苦指数', dataIndex: 'userMisery', key: 'userMisery' },
-                  ]}
-                />
-              </Card>
-            </Col>
-            <Col span={12}>
-              <Card title="改善效果" bordered={false}>
-                <Table
-                  dataSource={tableData}
-                  columns={[
-                    { title: '交易', dataIndex: 'transaction', key: 'transaction' },
-                    { title: '项目', dataIndex: 'project', key: 'project' },
-                    { title: '每分钟交易量 (TPM)', dataIndex: 'tpm', key: 'tpm' },
-                    { title: '失败率', dataIndex: 'failureRate', key: 'failureRate' },
-                    { title: '用户痛苦指数', dataIndex: 'userMisery', key: 'userMisery' },
-                  ]}
-                />
-              </Card>
-            </Col>
-          </Row>
-        </Content>
+        <Layout>
+          <Routes>
+            <Route path="/" element={<DashboardPage />} />
+            <Route path="/events" element={<EventsPage />} />
+            <Route path="/errors" element={<ErrorsMonitorPage />} />
+            {/* 性能监控页面路由待添加 */}
+            <Route path="/performance" element={<div>性能监控页面开发中...</div>} />
+          </Routes>
+        </Layout>
       </Layout>
-    </Layout>
+    </Router>
   );
 };
 
