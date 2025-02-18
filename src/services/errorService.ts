@@ -1,5 +1,7 @@
 import axios from "axios";
-import { API_BASE } from "../config/api";
+
+// 使用环境变量
+const API_BASE = import.meta.env.VITE_API_BASE;
 
 export interface ErrorQueryParams {
   startTime: number;
@@ -34,7 +36,7 @@ interface ErrorListResponse {
 
 export const errorService = {
   fetchList: async (params: ErrorQueryParams) => {
-    const response = await axios.get<ErrorListResponse>(`${API_BASE}/errors/list`, { params });
+    const response = await axios.get<ErrorListResponse>(`${API_BASE}/api/errors/list`, { params });
     return response.data;
   },
 
@@ -44,14 +46,14 @@ export const errorService = {
     apikey: string;
   }) => {
     const response = await axios.get<{ code: number; data: ErrorStats }>(
-      `${API_BASE}/errors/stats`,
+      `${API_BASE}/api/errors/stats`,
       { params }
     );
     return response.data;
   },
 
   fetchDetail: async (id: string, apikey: string) => {
-    const response = await axios.get(`${API_BASE}/errors/${id}`, {
+    const response = await axios.get(`${API_BASE}/api/errors/${id}`, {
       params: { apikey },
     });
     return response.data;

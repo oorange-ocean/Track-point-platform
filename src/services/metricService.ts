@@ -1,5 +1,6 @@
 import axios from "axios";
-import { API_BASE } from "../config/api";
+
+const API_BASE = import.meta.env.VITE_API_BASE;
 
 export interface MetricFilters {
   startTime?: string;

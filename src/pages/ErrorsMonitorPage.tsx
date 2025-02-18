@@ -21,7 +21,7 @@ const ErrorsMonitorPage: React.FC = () => {
   const [queryParams, setQueryParams] = useState<ErrorQueryParams>({
     startTime: dayjs().subtract(7, "day").unix(),
     endTime: dayjs().unix(),
-    apikey: "your-api-key", // 实际使用时需要替换
+    apikey: import.meta.env.VITE_API_KEY, // 使用环境变量
     page: 1,
     pageSize: 10,
   });
