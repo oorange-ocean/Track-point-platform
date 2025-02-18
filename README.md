@@ -10,20 +10,6 @@
 前端：React, TypeScript, Ant Design, Chart.js
 数据库：MongoDB 或 MySQL(未定)
 
-项目结构
-src/
-├── components/
-│   ├── EventTable.tsx  # 事件管理表格
-│   ├── EventForm.tsx   # 事件表单（新增/编辑）
-│   ├── Dashboard.tsx   # 数据可视化看板
-│   ├── FilterPanel.tsx # 筛选面板
-│   ├── api.ts          # API 请求封装
-├── pages/
-│   ├── EventsPage.tsx  # 事件管理页面
-│   ├── DashboardPage.tsx # 看板页面
-├── App.tsx
-├── main.tsx
-
 功能说明
 1. 埋点数据查询
 查询 PV、UV：通过提供的筛选条件，展示指定事件的页面访问量（PV）和独立访客数（UV）。
@@ -40,7 +26,7 @@ npm install
 运行开发服务器
 
 npm start
-此时，前端将通过 http://localhost:3000 进行访问，页面内容会自动刷新。
+此时，前端将通过 http://localhost:5173 进行访问，页面内容会自动刷新。
 
 项目组件说明
 EventTable.tsx：展示埋点事件数据的表格，支持增删改查。
