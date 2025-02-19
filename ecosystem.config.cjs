@@ -1,6 +1,6 @@
 module.exports = {
   apps: [{
-    name: "track-point-platform",
+    name: "tpp",
     script: "npm",
     args: "run preview",
     env: {

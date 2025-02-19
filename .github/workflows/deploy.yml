@@ -3,6 +3,17 @@ name: Deploy to Ubuntu Server
 on:
   push:
     branches: [ main ]  # 当 main 分支收到推送时触发
+  workflow_dispatch:
+    inputs:
+      logLevel:
+        description: '部署日志级别'
+        required: false
+        default: 'warning'
+        type: choice
+        options:
+          - info
+          - warning
+          - debug
 
 jobs:
   deploy:
@@ -29,7 +40,7 @@ jobs:
           host: ${{ secrets.SERVER_HOST }}
           username: ${{ secrets.SERVER_USERNAME }}
           key: ${{ secrets.SERVER_SSH_KEY }}
-          source: "dist/*"
+          source: "dist/*,ecosystem.config.cjs,package.json"
           target: "~/tpp"
           
       - name: Execute SSH commands
@@ -40,4 +51,5 @@ jobs:
           key: ${{ secrets.SERVER_SSH_KEY }}
           script: |
             cd ~/tpp
-            pm2 restart ecosystem.config.js 
+            npm install --production
+            pm2 restart ecosystem.config.cjs 
