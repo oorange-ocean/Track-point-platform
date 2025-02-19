@@ -20,14 +20,6 @@
 4. 数据可视化看板
 折线图、饼图：使用 Chart.js 进行数据的可视化，展示 PV 和 UV 的时间趋势。
 
-前端开发
-安装依赖
-npm install
-运行开发服务器
-
-npm start
-此时，前端将通过 http://localhost:5173 进行访问，页面内容会自动刷新。
-
 项目组件说明
 EventTable.tsx：展示埋点事件数据的表格，支持增删改查。
 EventForm.tsx：用于新增或编辑埋点事件。
