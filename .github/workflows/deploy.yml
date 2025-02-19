@@ -51,5 +51,5 @@ jobs:
           key: ${{ secrets.SERVER_SSH_KEY }}
           script: |
             cd ~/tpp
-            npm install -g serve  # 安装全局的静态文件服务器
+            npm install
             pm2 restart ecosystem.config.cjs 
