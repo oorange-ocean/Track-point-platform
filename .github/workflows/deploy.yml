@@ -30,7 +30,7 @@ jobs:
           username: ${{ secrets.SERVER_USERNAME }}
           key: ${{ secrets.SERVER_SSH_KEY }}
           source: "dist/*"
-          target: "/path/to/your/project"
+          target: "~/tpp"
           
       - name: Execute SSH commands
         uses: appleboy/ssh-action@master
@@ -39,5 +39,5 @@ jobs:
           username: ${{ secrets.SERVER_USERNAME }}
           key: ${{ secrets.SERVER_SSH_KEY }}
           script: |
-            cd /path/to/your/project
+            cd ~/tpp
             pm2 restart ecosystem.config.js 
